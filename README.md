@@ -12,7 +12,7 @@ This project demonstrates basic route routing using PHP SimpleApi.
 
 1. Clone the repository:
     ```bash
-    git clone https://github.com/S44nt1ag0/BasicRoutingPhp.git
+    git clone https://github.com/S44nt1ag0/BasicRoutingPHP.git
     ```
 2. Install dependencies (if any).
 3. Start your PHP server:
