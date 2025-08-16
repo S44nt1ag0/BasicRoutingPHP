@@ -1,31 +1,35 @@
 # PHP SimpleApi CRUD Example
 
-This project demonstrates basic route routing using PHP SimpleApi.
+Este projeto demonstra o roteamento básico de rotas usando PHP SimpleApi.
 
 ## Features
 
-- Simple CRUD operations
-- Easy route management
-- Lightweight and fast
+- Operações CRUD simples
+- Gerenciamento fácil de rotas
+- Leve e rápido
+
+## Pré-requisitos
+
+- É necessário ter o driver SQLite instalado para utilizar o banco de dados.
 
 ## Getting Started
 
-1. Clone the repository:
+1. Clone o repositório:
     ```bash
     git clone https://github.com/S44nt1ag0/BasicRoutingPHP.git
     ```
-2. Install dependencies (if any).
-3. Start your PHP server:
+2. Instale as dependências (se houver).
+3. Inicie seu servidor PHP:
     ```bash
     php -S localhost:8000
     ```
-4. Access the app at [http://localhost:8000](http://localhost:8000).
+4. Acesse o app em [http://localhost:8000](http://localhost:8000).
 
 ## Usage
 
-- Create, read, update, and delete records via defined routes.
-- Customize routes in `index.php`.
+- Crie, leia, atualize e exclua registros via rotas definidas.
+- Personalize as rotas em `index.php`.
 
 ## License
 
-This project is licensed under the MIT License.
+Este projeto está licenciado sob a Licença MIT.
