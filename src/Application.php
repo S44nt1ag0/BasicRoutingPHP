@@ -11,6 +11,8 @@ class Application
 
     $router->create("GET", "/", [$userController, "index"]);
     $router->create("POST", "/user", [$userController, "createUser"]);
+    $router->create("POST", "/login", [$userController, "login"]);
+    $router->create("GET", "/v1/dash", [$userController, "dashBoard"]);
     $router->init();
 
   }
