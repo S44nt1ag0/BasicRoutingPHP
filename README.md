@@ -1,11 +1,12 @@
 # PHP SimpleApi CRUD Example
 
-Este projeto demonstra o roteamento básico de rotas usando PHP SimpleApi.
+Este projeto demonstra o roteamento básico de rotas usando PHP SimpleApi, agora com autenticação.
 
 ## Features
 
 - Operações CRUD simples
 - Gerenciamento fácil de rotas
+- Autenticação de usuários
 - Leve e rápido
 
 ## Pré-requisitos
@@ -28,7 +29,8 @@ Este projeto demonstra o roteamento básico de rotas usando PHP SimpleApi.
 ## Usage
 
 - Crie, leia, atualize e exclua registros via rotas definidas.
-- Personalize as rotas em `index.php`.
+- Autentique usuários antes de acessar rotas protegidas.
+- Personalize as rotas e autenticação em `index.php`.
 
 ## License
 
