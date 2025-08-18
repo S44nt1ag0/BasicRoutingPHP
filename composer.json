@@ -1,5 +1,8 @@
 {
     "autoload": {
         "psr-4": {"SimpleApi\\": "src/"}
+    },
+    "require": {
+        "firebase/php-jwt": "^6.11"
     }
 }
