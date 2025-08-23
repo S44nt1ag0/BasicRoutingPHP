@@ -66,15 +66,15 @@ class UserController
 
         $user = $this->userRepository->findByEmail($input['email']);
 
-        if (!$user || !password_verify($input['password'], $user['password'])) {
+        if (!$user || !password_verify($input['password'], $user->getPassword())) {
             http_response_code(401);
             echo json_encode(["error" => "Invalid email or password"]);
             return;
         }
 
         $payload = [
-            'user_id' => $user['id'],
-            'email' => $user['email'],
+            'user_id' => $user->getId(),
+            'email' => $user->getEmail(),
             'exp' => time() + 3600
         ];
 
