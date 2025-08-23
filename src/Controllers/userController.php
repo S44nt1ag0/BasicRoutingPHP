@@ -2,6 +2,7 @@
 
 namespace SimpleApi\Controllers;
 use SimpleApi\Database\Connection;
+use SimpleApi\Middlewares\AuthMiddleware;
 
 use Firebase\JWT\JWT;
 use Firebase\JWT\Key;
@@ -112,7 +113,7 @@ class UserController
 
     public function dashBoard()
     {
-        $userData = $this->authenticate();
+        $userData = AuthMiddleware::authenticate();
 
         http_response_code(200);
         echo json_encode([
