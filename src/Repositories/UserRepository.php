@@ -3,6 +3,8 @@
 namespace SimpleApi\Repositories;
 
 use SimpleApi\Database\Connection;
+use SimpleApi\Models\User;
+
 use PDO;
 
 class UserRepository
@@ -29,12 +31,13 @@ class UserRepository
 
     }
 
-    public function findByEmail(string $email): ?array
+    public function findByEmail(string $email): ?User
     {
         $stmt = $this->pdo->prepare("SELECT * FROM users WHERE email = :email");
         $stmt->execute([':email' => $email]);
-        $user = $stmt->fetch(PDO::FETCH_ASSOC);
-        return $user ?: null;
+        $data = $stmt->fetch(PDO::FETCH_ASSOC);
+
+        return $data ? User::fromArray($data) : null;
     }
 
 
