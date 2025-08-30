@@ -16,6 +16,46 @@ class UserController
         $this->userRepository = new UserRepository();
     }
 
+    public function deleteUser()
+    {
+        AuthMiddleware::onlyAdmin();
+
+        $input = json_decode(file_get_contents("php://input"), true);
+
+        if (
+            !isset($input['id'])
+        ) {
+            http_response_code(400);
+            echo json_encode(["error" => "Required fields: user, email, name, password"]);
+            return;
+        }
+
+        try {
+
+            $userExists = $this->userRepository->userExists($input["id"]);
+
+            if (!$userExists) {
+                http_response_code(400);
+                echo json_encode(["error" => "User not found"]);
+                return;
+            }
+
+            $deteUser = $this->userRepository->deleteUser($input["id"]);
+
+            if (!$deteUser) {
+                throw new \Exception("Failed to delete user");
+            }
+
+            http_response_code(201);
+            echo json_encode(["message" => "user deleted successfully"]);
+
+        } catch (\Exception $e) {
+            http_response_code(500);
+            echo json_encode(["error" => "Error deleting user."]);
+        }
+
+    }
+
     public function createUser()
     {
         $input = json_decode(file_get_contents("php://input"), true);
@@ -75,6 +115,7 @@ class UserController
         $payload = [
             'user_id' => $user->getId(),
             'email' => $user->getEmail(),
+            'is_admin' => $user->getIsAdmin(),
             'exp' => time() + 3600
         ];
 
@@ -90,7 +131,8 @@ class UserController
         http_response_code(200);
         echo json_encode([
             "id" => $userData['user_id'],
-            "email" => $userData['email']
+            "email" => $userData['email'],
+            "is_admin" => $userData['is_admin']
         ]);
     }
 
