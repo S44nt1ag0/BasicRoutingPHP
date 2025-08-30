@@ -13,6 +13,7 @@ class Application
     $router->create("POST", "/user", [$userController, "createUser"]);
     $router->create("POST", "/login", [$userController, "login"]);
     $router->create("GET", "/v1/dash", [$userController, "dashBoard"]);
+    $router->create("DELETE", "/admin/delete", [$userController, "deleteUser"]);
     $router->init();
 
   }
