@@ -16,6 +16,18 @@ class UserRepository
         $this->pdo = Connection::getConnection();
     }
 
+    public function deleteUser(int $id)
+    {
+        $stmt = $this->pdo->prepare("UPDATE users SET deleted_at = NOW() WHERE id = :id");
+        return $stmt->execute([':id' => $id]);
+    }
+
+    public function userExists(int $id): bool
+    {
+        $stmt = $this->pdo->prepare("SELECT COUNT(*) FROM users WHERE id = :id AND deleted_at IS NULL");
+        $stmt->execute([':id' => $id]);
+        return $stmt->fetchColumn() > 0;
+    }
     public function createUser(array $data): bool
     {
         $stmt = $this->pdo->prepare(

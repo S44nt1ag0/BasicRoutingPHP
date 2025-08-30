@@ -8,6 +8,18 @@ use Firebase\JWT\Key;
 class AuthMiddleware
 {
     private static $jwt_secret = "chaveSecreta@2025";
+    public static function onlyAdmin(): array
+    {
+        $userData = self::authenticate();
+
+        if (empty($userData['is_admin']) || !$userData['is_admin']) {
+            http_response_code(403);
+            echo json_encode(["error" => "Access denied: Admins only"]);
+            exit;
+        }
+
+        return $userData;
+    }
 
     public static function authenticate(): array
     {
