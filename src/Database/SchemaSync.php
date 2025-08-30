@@ -11,15 +11,17 @@ class SchemaSync
         $pdo = Connection::getConnection();
 
         $sql = "
-            CREATE TABLE IF NOT EXISTS users (
-                id INT AUTO_INCREMENT PRIMARY KEY,
-                user VARCHAR(255) NOT NULL UNIQUE,
-                email VARCHAR(255) NOT NULL UNIQUE,
-                name VARCHAR(255) NOT NULL,
-                password VARCHAR(255) NOT NULL,
-                created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
-            );
-        ";
+    CREATE TABLE IF NOT EXISTS users (
+        id INT AUTO_INCREMENT PRIMARY KEY,
+        user VARCHAR(255) NOT NULL UNIQUE,
+        email VARCHAR(255) NOT NULL UNIQUE,
+        name VARCHAR(255) NOT NULL,
+        password VARCHAR(255) NOT NULL,
+        created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+        is_admin BOOLEAN DEFAULT FALSE,
+        deleted_at TIMESTAMP NULL DEFAULT NULL
+    );
+";
 
         $pdo->exec($sql);
     }
