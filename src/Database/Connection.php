@@ -2,6 +2,9 @@
 
 namespace SimpleApi\Database;
 
+require_once __DIR__ . '/../../vendor/autoload.php';
+use Dotenv\Dotenv;
+
 use PDO;
 use PDOException;
 
@@ -14,7 +17,15 @@ class Connection
         if (self::$pdo === null) {
             try {
 
-                self::$pdo = new PDO('sqlite:' . __DIR__ . '/../../data/database.sqlite');
+                $dotenv = Dotenv::createImmutable(__DIR__ . '/../../');
+                $dotenv->load();
+
+                $DB_HOST = $_ENV['DB_HOST'];
+                $DB_USER = $_ENV['DB_USER'];
+                $DB_PASS = $_ENV['DB_PASS'];
+                $DB_NAME = $_ENV['DB_NAME'];
+
+                self::$pdo = new PDO("mysql:host=$DB_HOST; dbname=$DB_NAME;", username: $DB_USER, password: $DB_PASS);
                 self::$pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
             } catch (PDOException $e) {
