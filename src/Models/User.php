@@ -15,13 +15,15 @@ class User
         string $user,
         string $email,
         string $name,
-        string $password
+        string $password,
+        bool $is_admin
     ) {
         $this->id = $id;
         $this->user = $user;
         $this->email = $email;
         $this->name = $name;
         $this->password = $password;
+        $this->is_admin = $is_admin;
     }
 
     // Getters
@@ -50,13 +52,16 @@ class User
         return $this->password;
     }
 
-    // Setters (se necessário)
+    public function getIsAdmin(): bool
+    {
+        return $this->is_admin;
+    }
+
     public function setPassword(string $password): void
     {
         $this->password = $password;
     }
 
-    // Métodos auxiliares
     public function toArray(): array
     {
         return [
@@ -65,6 +70,7 @@ class User
             'email' => $this->email,
             'name' => $this->name,
             'password' => $this->password,
+            'is_admin' => $this->is_admin,
         ];
     }
 
@@ -75,7 +81,8 @@ class User
             $data['user'],
             $data['email'],
             $data['name'],
-            $data['password']
+            $data['password'],
+            $data['is_admin'] ?? false
         );
     }
 }
