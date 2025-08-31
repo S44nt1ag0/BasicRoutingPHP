@@ -115,7 +115,6 @@ class UserController
         $payload = [
             'user_id' => $user->getId(),
             'email' => $user->getEmail(),
-            'is_admin' => $user->getIsAdmin(),
             'exp' => time() + 3600
         ];
 
@@ -131,8 +130,7 @@ class UserController
         http_response_code(200);
         echo json_encode([
             "id" => $userData['user_id'],
-            "email" => $userData['email'],
-            "is_admin" => $userData['is_admin']
+            "email" => $userData['email']
         ]);
     }
 

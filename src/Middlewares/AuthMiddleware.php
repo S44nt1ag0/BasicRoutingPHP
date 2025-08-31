@@ -4,17 +4,21 @@ namespace SimpleApi\Middlewares;
 
 use Firebase\JWT\JWT;
 use Firebase\JWT\Key;
+use SimpleApi\Repositories\UserRepository;
 
 class AuthMiddleware
 {
     private static $jwt_secret = "chaveSecreta@2025";
+    private UserRepository $userRepository;
     public static function onlyAdmin(): array
     {
         $userData = self::authenticate();
 
-        if (empty($userData['is_admin']) || !$userData['is_admin']) {
+        $isAdmin = (new UserRepository())->isAdmin($userData['user_id']);
+
+        if (!$isAdmin) {
             http_response_code(403);
-            echo json_encode(["error" => "Access denied: Admins only"]);
+            echo json_encode(["error" => "Access denied. Admins only."]);
             exit;
         }
 

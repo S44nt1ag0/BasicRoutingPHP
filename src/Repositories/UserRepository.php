@@ -22,6 +22,14 @@ class UserRepository
         return $stmt->execute([':id' => $id]);
     }
 
+    public function isAdmin(int $id): bool
+    {
+        $stmt = $this->pdo->prepare("SELECT is_admin FROM users WHERE id = :id");
+        $stmt->execute([':id' => $id]);
+        $result = $stmt->fetch(PDO::FETCH_ASSOC);
+        return $result ? (bool) $result['is_admin'] : false;
+    }
+
     public function userExists(int $id): bool
     {
         $stmt = $this->pdo->prepare("SELECT COUNT(*) FROM users WHERE id = :id AND deleted_at IS NULL");
