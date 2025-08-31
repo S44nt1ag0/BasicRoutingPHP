@@ -9,6 +9,8 @@ class User
     private string $email;
     private string $name;
     private string $password;
+    private bool $is_admin;
+    private ?string $deleted_at;
 
     public function __construct(
         ?int $id,
@@ -16,7 +18,8 @@ class User
         string $email,
         string $name,
         string $password,
-        bool $is_admin
+        bool $is_admin,
+        ?string $deleted_at = null
     ) {
         $this->id = $id;
         $this->user = $user;
@@ -24,6 +27,7 @@ class User
         $this->name = $name;
         $this->password = $password;
         $this->is_admin = $is_admin;
+        $this->deleted_at = $deleted_at;
     }
 
     // Getters
@@ -57,6 +61,11 @@ class User
         return $this->is_admin;
     }
 
+    public function getDeletedAt(): ?string
+    {
+        return $this->deleted_at;
+    }
+
     public function setPassword(string $password): void
     {
         $this->password = $password;
@@ -71,6 +80,7 @@ class User
             'name' => $this->name,
             'password' => $this->password,
             'is_admin' => $this->is_admin,
+            'deleted_at' => $this->deleted_at,
         ];
     }
 
@@ -82,7 +92,8 @@ class User
             $data['email'],
             $data['name'],
             $data['password'],
-            $data['is_admin'] ?? false
+            $data['is_admin'] ?? false,
+            $data['deleted_at'] ?? null
         );
     }
 }
