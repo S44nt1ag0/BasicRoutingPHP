@@ -112,6 +112,12 @@ class UserController
             return;
         }
 
+        if ($user->getDeletedAt() !== null) {
+            http_response_code(401);
+            echo json_encode(["error" => "account deleted"]);
+            return;
+        }
+
         $payload = [
             'user_id' => $user->getId(),
             'email' => $user->getEmail(),
